@@ -1,4 +1,4 @@
-# This is if you don't like text you can watch this image
+# Hallo World!
 
 ## Thank you
 
@@ -28,41 +28,96 @@ pod-username-managed2
 **Create the playbook with variables**
 
 ```
-- name: Use Variables in Playbook
-  hosts: pod-username-managed2
+- name: Quiz Playbook
+  hosts: pod-dett-managed2
   remote_user: student
   become: true
-  vars:
-    required_Pkg:
-      - apache2
-      - python3-urllib3
-    web_Service: apache2
-    content_File: "adinusa lab quiz variables - username"
-    dest_File: /var/www/html/index.html
   tasks:
-    - name: Install required packages
+    - name: Install latest version of apache2
       apt:
-        name: "{{ item }}"
+        name: apache2
         state: latest
-      loop: "{{ required_Pkg }}"
-      
-    - name: Ensure web service is enabled and running
+
+    - name: Install latest version of mariadb-server
+      apt:
+        name: mariadb-server
+        state: latest
+
+    - name: Install latest version of php
+      apt:
+        name: php
+        state: latest
+
+    - name: Install latest version of php-mysql
+      apt:
+        name: php-mysql
+        state: latest
+
+    - name: Ensure apache2 service is enabled and running
       service:
-        name: "{{ web_Service }}"
+        name: apache2
         state: started
         enabled: true
 
-    - name: Ensure specific content exists
+    - name: Ensure mariadb service is enabled and running
+      service:
+        name: mariadb
+        state: started
+        enabled: true
+
+    - name: Generate web content for testing
       copy:
-        content: "{{ content_File }}"
-        dest: "{{ dest_File }}"
+        content: "Adinusa quiz Playbook - dett"
+        dest: /var/www/html/index.php
 
 - name: Test webserver access from control node
   hosts: localhost
   tasks:
-    - name: Test access to the web server
+    - name: Test access to the apache2 web server
       uri:
-        url: http://pod-username-managed2/index.html
+        url: http://pod-dett-managed2/index.php
         return_content: no
         status_code: 200
+
 ```
+
+**Run With Sintax Check**
+```
+ansible-playbook --syntax-check quiz-1_playbook.yml
+ansible-playbook quiz-1_playbook.yml
+```
+
+**Verification**
+
+pastikan di luar folder saat check atau verifikasi
+
+```
+ls -l quiz-1
+```
+
+**Check if the packages are installed on the managed hosts**
+
+```
+ansible pod-dett-managed2 -m shell -a "dpkg -l | grep -E 'apache2|mariadb-server|php|php-mysql'"
+```
+
+**Verify that the apache2 and mariadb services are running**
+
+```
+ansible pod-dett-managed2 -m shell -a "systemctl status apache2 | grep 'active (running)'"
+ansible pod-dett-managed2 -m shell -a "systemctl status mariadb | grep 'active (running)'"
+
+```
+
+**Confirm the existence of the /var/www/html/index.php file with the correct content**
+
+```
+ansible pod-username-managed2 -m shell -a "cat /var/www/html/index.php"
+```
+
+**Test webserver access**
+```
+curl http://pod-dett-managed2/index.php
+```
+
+
