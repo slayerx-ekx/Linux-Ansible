@@ -23,7 +23,7 @@ inventory = ./inventory
 
 ```
 [pod]
-pod-username-managed2
+pod-dett-managed2
 ```
 
 **Create the playbook with variables**
@@ -145,7 +145,7 @@ inventory = ./inventory
 
 ```
 [pod]
-pod-username-managed2
+pod-dett-managed2
 ```
 
 **Create the playbook with variables**
