@@ -1,6 +1,6 @@
 # This is if you don't like text you can watch this image
 
-# You know, sometimes the image takes a long time to come out because it is loading, so if the image is not there, please wait okay.
+# You know, sometimes the image takes a long time to come out because it is loading, so if the image is not there, please wait okay. Or you can go to Images folder.
 
 ## Thank you
 
