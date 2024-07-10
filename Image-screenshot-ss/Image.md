@@ -18,4 +18,9 @@
 
 ### Ansible Administration 1
 
-### Quiz-3 : Variables
+### Quiz-3 : Jinja 2 template
+
+![asdasd](https://github.com/slayerx-ekx/Linux-Ansible/assets/155826497/ca95974b-7a1b-489c-9d37-c516822c82a1)
+
+# THANK YOU
+
