@@ -1,6 +1,4 @@
-# Hi all, I hope this can be useful for you.
-
-## Thank you
+# ANSIBLE CONFIGURATION ON UBUNTU LTS jammy
 
 ### Ansible Administration 1
 
